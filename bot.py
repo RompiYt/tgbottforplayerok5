@@ -7,8 +7,6 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 from openai import OpenAI
 
-os.environ.pop("HTTP_PROXY", None)
-os.environ.pop("HTTPS_PROXY", None)
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
