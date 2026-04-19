@@ -7,24 +7,18 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 from openai import OpenAI
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 
-# Bot token from environment variables
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-# Initialize bot and dispatcher
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
-# Initialize OpenRouter client
 openrouter_client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
     api_key=OPENROUTER_API_KEY,
 )
-
-# --- Handlers ---
 
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
@@ -52,7 +46,6 @@ async def handle_message(message: types.Message):
     await message.answer("Проверяю... Пожалуйста, подождите.")
 
     try:
-        # Use OpenRouter for AI analysis
         response = openrouter_client.chat.completions.create(
             model="openrouter/auto", # Using 'auto' to let OpenRouter select the best model
             messages=[
